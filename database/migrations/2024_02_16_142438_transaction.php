@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('koperasi', function (Blueprint $table) {
-            $table->id();
-            $table->date('date_transaction');
-            $table->integer('qty');
-            $table->integer('price');
-            $table->boolean('pay');
+        Schema::table('koperasi', function (Blueprint $table) {
+            $table->unsignedBigInteger('karyawan_id');
+            $table->unsignedBigInteger('item_id');
+            $table->foreign('karyawan_id')->references('id')->on('karyawan');
+            $table->foreign('item_id')->references('id')->on('item');
         });
     }
 

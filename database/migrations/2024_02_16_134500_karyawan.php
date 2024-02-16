@@ -11,7 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::create('karyawan', function (Blueprint $table) {
+            $table->id();
+            $table->string('npk', 5)->unique();
+            $table->string('name', 50);
+            $table->string('address', 50);
+        });
     }
 
     /**
