@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FormController;
 use App\Http\Controllers\KoperasiController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,4 +18,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(KoperasiController::class)->group(function () {
     Route::get('/', 'index');
+    Route::post('/', 'store')->name('store');
+    Route::get('/create', 'create');
 });
