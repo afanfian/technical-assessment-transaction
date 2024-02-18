@@ -15,9 +15,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', function () {
+    return view('welcome');
+});
 
 Route::controller(KoperasiController::class)->group(function () {
-    Route::get('/', 'index');
-    Route::post('/', 'store')->name('store');
-    Route::get('/create', 'create');
+    Route::get('/transaction', 'index');
+    Route::get('/transaction/create', 'create');
+    Route::post('/transaction/store', 'store');
+    Route::get('/transaction/{id}/edit', 'edit');
+    Route::put('/transaction/{id}', 'update');
+    Route::delete('/transaction/{id}', 'destroy');
 });

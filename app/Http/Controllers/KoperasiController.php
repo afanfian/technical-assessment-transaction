@@ -4,34 +4,33 @@ namespace App\Http\Controllers;
 
 use App\Models\Item;
 use App\Models\Karyawan;
+use App\Models\Koperasi;
 use Illuminate\Http\Request;
 
 class KoperasiController extends Controller
 {
     function index(){
-        return view('welcome',[
+        return view('transaction.index',[
             'karyawans' => Karyawan::all(),
             'items' => Item::all(),
+            'koperasis' => Koperasi::all()
+        ]);
+    }
+    function create(){
+        return view('transaction.create',[
+             'karyawans' => Karyawan::all(),
+             'items' => Item::all(),
+             'koperasis' => Koperasi::all()
         ]);
     }
 
     function store(Request $request){
-        $validatedData = $request->validate([
-            'tanggal' => 'required|date',
-            'nama' => 'required',
-            'item' => 'required',
-            'harga' => 'required|numeric',
-            'quantity' => 'required|numeric',
-            'bayar' => 'required',
-        ]);
-
-        return redirect('/')->with('success', 'Data berhasil disimpan!');
+        Koperasi::create($request->except('_token', 'submit'));
+        return redirect('/transaction');
     }
 
-    function create(){
-        return view('form',[
-            'karyawans' => Karyawan::all(),
-            'items' => Item::all(),
-        ]);
+    function destroy($id){
+        Koperasi::destroy($id);
+        return redirect('/transaction');
     }
 }
