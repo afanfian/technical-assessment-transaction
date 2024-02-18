@@ -28,14 +28,13 @@ class KoperasiController extends Controller
         return redirect('/transaction');
     }
     function edit($id){
-        $transaction = Koperasi::find($id);
+        $transaction = Koperasi::with('karyawan', 'item')->find($id);
+        // @dd($transaction->toJson());
         return view('transaction.edit', [
-            'karyawans' => Karyawan::all(),
-            'items' => Item::all(),
-            'koperasis' => Koperasi::all()
-        ], compact('transaction'));
+            'items'=> Item::all(), 
+            'koperasis' => $transaction
+        ]);
     }
-    
     function update(Request $request, $id){
         Koperasi::find($id)->update($request->except('_token', 'submit', '_method'));
         return redirect('/transaction',);

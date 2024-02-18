@@ -2,39 +2,39 @@
 
 @section('content')
     <div class="flex items-center justify-center">
-        <form action="/transaction/{{ $transaction->id }}" method="POST" class="w-4/12 bg-white shadow-md rounded-lg p-8">
+        <form action="/transaction/{{ $koperasis->id }}" method="POST" class="w-4/12 bg-white shadow-md rounded-lg p-8">
             @method('PUT')
             @csrf
             <p class="text-center text-xl font-bold pb-5">Tambahkan Data Transaksi</p>
             <div class="mb-4">
                 <label for="date" class="block text-gray-700 font-bold mb-2">Tanggal</label>
-                <input type="date" name="date_transaction" id="date_transaction" value="{{ date('Y-m-d') }}" class="px-4 py-2 border rounded-lg w-full focus:outline-none focus:border-blue-500" required disabled>
+                <input type="date" name="date_transaction" id="date_transaction" value="{{ $koperasis->date_transaction }}" class="px-4 py-2 border rounded-lg w-full focus:outline-none focus:border-blue-500" required disabled>
             </div>
             <div class="mb-4">
                 <label for="name" class="block text-gray-700 font-bold mb-2">Nama</label>
-                <input type="text" name="name" id="name" class="px-4 py-2 border rounded-lg w-full focus:outline-none focus:border-blue-500" required disabled>
+                <input value="{{$koperasis->karyawan ? $koperasis->karyawan->npk : '-'}} - {{ $koperasis->karyawan ? $koperasis->karyawan->name : '-' }}" class="px-4 py-2 border rounded-lg w-full focus:outline-none focus:border-blue-500" required disabled></input>
             </div>
             <div class="mb-4">
                 <label for="role" class="block text-gray-700 font-bold mb-2">Item:</label>
-                <input type="text" name="role" id="role" class="px-4 py-2 border rounded-lg w-full focus:outline-none focus:border-blue-500" required disabled>
+                <input value="{{$koperasis->item ? $koperasis->item->code : '-'}} - {{ $koperasis->item ? $koperasis->item->name_item : '-' }}" class="px-4 py-2 border rounded-lg w-full focus:outline-none focus:border-blue-500" required disabled></input>
             </div>
-            <div class="flex mb-4 gap-5">
+            <div class="mb-4">
                 <label for="price" class="block text-gray-700 font-bold mb-2">Harga:</label>
-                <p id="price" name="price" required></p>
+                <input type="text" name="price" id="price" value="{{ $koperasis->price }}" placeholder="2" class="px-4 py-2 border rounded-lg w-full focus:outline-none focus:border-blue-500" required disabled>
             </div>
             <div class="mb-4">
                 <label for="qty" class="block text-gray-700 font-bold mb-2">Quantity:</label>
-                <input type="text" name="qty" id="qty" placeholder="2" class="px-4 py-2 border rounded-lg w-full focus:outline-none focus:border-blue-500" required>
+                <input type="text" name="qty" id="qty" value="{{ $koperasis->qty }}" placeholder="2" class="px-4 py-2 border rounded-lg w-full focus:outline-none focus:border-blue-500" required>
             </div> 
-            <div class="flex mb-4 gap-5">
+            <div class="mb-4">
                 <label for="result" class="block text-gray-700 font-bold mb-2">Total:</label>
-                <p id="result" name="result" required disabled></p>
+                <input type="text" id="result" name="result" value="{{ $koperasis->price * $koperasis->qty }}" class="px-4 py-2 border rounded-lg w-full focus:outline-none focus:border-blue-500" required disabled></input>
             </div>
             <div class="mb-4">
                 <label for="pay" class="block text-gray-700 font-bold mb-2">Bayar:</label>
                     <div class="flex gap-1">
-                        <input type="checkbox" id="bayar" name="bayar" value="Lunas"> Lunas
-                        <input type="checkbox" id="bayar" name="bayar" value="Cicil"> Cicil
+                        <input type="radio" id="pay_lunas" name="pay" value="1" {{ $koperasis->pay == 1 ? 'checked' : '' }}> Lunas
+                        <input type="radio" id="pay_cicil" name="pay" value="0" {{ $koperasis->pay == 0 ? 'checked' : '' }}> Cicil
                     </div>
             </div>
             <button type="submit" name="submit" class="px-4 py-2 rounded-lg text-white bg-blue-500 hover:bg-blue-600 focus:outline-none">
@@ -51,14 +51,8 @@
         const idquantity = document.getElementById('qty');
         const idTotal = document.getElementById('result');
 
-        let price = 0;
+        let price = idPrice.value || 0;
         let qty = 0;
-
-        var itemPrices = {};
-        @foreach($items as $item)
-            itemPrices[{{ $item->id }}] = {{ $item->price }};
-        @endforeach
-
         
         function reset(){
             idPrice.textContent = '';
@@ -66,18 +60,10 @@
         }
 
         document.getElementById('reset').addEventListener('click', reset);
-        
-
-        idItem.addEventListener('change', function() {
-        const selectedPrice = itemPrices[this.value];
-        idPrice.textContent = selectedPrice;
-        price = selectedPrice;
-        idTotal.textContent = selectedPrice * qty;
-        });
 
         idquantity.addEventListener('change', function() {
             const total = price * this.value;
-            idTotal.textContent = total;
+            idTotal.value = total;
             qty = this.value;
         });
     </script>

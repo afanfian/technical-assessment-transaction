@@ -43,8 +43,8 @@
             <div class="mb-4">
                 <label for="pay" class="block text-gray-700 font-bold mb-2">Bayar:</label>
                     <div class="flex gap-1">
-                        <input type="checkbox" id="pay" name="pay" value="1"> Lunas
-                        <input type="checkbox" id="pay" name="pay" value="0"> Cicil
+                        <input type="radio" id="pay" name="pay" value="1"> Lunas
+                        <input type="radio" id="pay" name="pay" value="0"> Cicil
                     </div>
             </div>
             <button type="submit" name="submit" class="px-4 py-2 rounded-lg text-white bg-blue-500 hover:bg-blue-600 focus:outline-none">

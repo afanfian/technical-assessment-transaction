@@ -75,8 +75,6 @@
                             <th class="p-4 border">Harga</th>
                             <th class="p-4 border">Total</th>
                             <th class="p-4 border">Tipe Bayar</th>
-                            <th class="p-4 border">Id Karyawan</th>
-                            <th class="p-4 border">Id Item</th>
                             <th class="p-4 border">Aksi</th>
                         </tr>
                     </thead>
@@ -102,8 +100,6 @@
                                         {{ $item->pay }}
                                     @endif
                                 </td>
-                                <td class="p-4 border">{{$item->karyawan_id}}</td>
-                                <td class="p-4 border">{{$item->item_id}}</td>
                                 <td class="p-4 border">
                                     <a href="/transaction/{{ $item->id }}/edit" class="text-blue-500"><i class="fas fa-edit"></i></a>
                                     <form action="/transaction/{{ $item->id }}" method="POST" class="inline">
