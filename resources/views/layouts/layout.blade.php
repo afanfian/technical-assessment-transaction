@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
     @vite('resources/css/app.css')
     <style>
         .dropdown-menu {
@@ -32,7 +33,7 @@
     <nav class="bg-white text-black p-4">
         <div class="container mx-auto flex justify-between items-center">
             <div>
-                <a href="/profile" class=" text-lg font-bold">
+                <a href="/" class=" text-lg font-bold">
                     <img src="/logo.png" alt="Logo" width="200" height="200">
                 </a>
             </div>

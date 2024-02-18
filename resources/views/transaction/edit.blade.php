@@ -8,25 +8,15 @@
             <p class="text-center text-xl font-bold pb-5">Tambahkan Data Transaksi</p>
             <div class="mb-4">
                 <label for="date" class="block text-gray-700 font-bold mb-2">Tanggal</label>
-                <input type="date" name="date_transaction" id="date_transaction" value="{{ date('Y-m-d') }}" class="px-4 py-2 border rounded-lg w-full focus:outline-none focus:border-blue-500" required>
+                <input type="date" name="date_transaction" id="date_transaction" value="{{ date('Y-m-d') }}" class="px-4 py-2 border rounded-lg w-full focus:outline-none focus:border-blue-500" required disabled>
             </div>
             <div class="mb-4">
                 <label for="name" class="block text-gray-700 font-bold mb-2">Nama</label>
-                <select id="name" name="name" class="w-full px-2 py-2 border rounded-lg" required>
-                    <option value="">Pilih Nama</option>
-                    @foreach($karyawans as $item)
-                        <option value="{{ $item->id }}">{{ $item->npk }} - {{ $item->name }}</option>
-                    @endforeach
-                </select>
+                <input type="text" name="name" id="name" class="px-4 py-2 border rounded-lg w-full focus:outline-none focus:border-blue-500" required disabled>
             </div>
             <div class="mb-4">
                 <label for="role" class="block text-gray-700 font-bold mb-2">Item:</label>
-                <select id="item" name="item" class="w-full px-2 py-2 border rounded-lg" required>
-                    <option value="">Pilih Item</option>
-                    @foreach($items as $item)
-                        <option value="{{ $item->id }}">{{ $item->code }} - {{ $item->name_item }}</option>
-                    @endforeach
-                </select>
+                <input type="text" name="role" id="role" class="px-4 py-2 border rounded-lg w-full focus:outline-none focus:border-blue-500" required disabled>
             </div>
             <div class="flex mb-4 gap-5">
                 <label for="price" class="block text-gray-700 font-bold mb-2">Harga:</label>
@@ -38,7 +28,7 @@
             </div> 
             <div class="flex mb-4 gap-5">
                 <label for="result" class="block text-gray-700 font-bold mb-2">Total:</label>
-                <p id="result" name="result" required></p>
+                <p id="result" name="result" required disabled></p>
             </div>
             <div class="mb-4">
                 <label for="pay" class="block text-gray-700 font-bold mb-2">Bayar:</label>
