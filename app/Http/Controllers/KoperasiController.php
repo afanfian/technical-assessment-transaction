@@ -24,7 +24,7 @@ class KoperasiController extends Controller
         ]);
     }
     function store(Request $request){
-        Koperasi::create($request->except('_token', 'submit'));
+        Koperasi::create($request->except('_token', 'submit', 'name', 'item','result'));
         return redirect('/transaction');
     }
     function edit($id){

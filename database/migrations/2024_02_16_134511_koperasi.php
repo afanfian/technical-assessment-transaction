@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('qty');
             $table->integer('price');
             $table->boolean('pay');
+            $table->timestamps();
         });
     }
 

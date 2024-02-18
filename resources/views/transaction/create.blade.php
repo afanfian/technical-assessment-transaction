@@ -11,7 +11,7 @@
             </div>
             <div class="mb-4">
                 <label for="name" class="block text-gray-700 font-bold mb-2">Nama</label>
-                <select id="name" name="name" class="w-full px-2 py-2 border rounded-lg" required>
+                <select id="name" name="karyawan_id" class="w-full px-2 py-2 border rounded-lg" required>
                     <option value="">Pilih Nama</option>
                     @foreach($karyawans as $item)
                         <option value="{{ $item->id }}">{{ $item->npk }} - {{ $item->name }}</option>
@@ -20,7 +20,7 @@
             </div>
             <div class="mb-4">
                 <label for="role" class="block text-gray-700 font-bold mb-2">Item:</label>
-                <select id="item" name="item" class="w-full px-2 py-2 border rounded-lg" required>
+                <select id="item" name="item_id" class="w-full px-2 py-2 border rounded-lg" required>
                     <option value="">Pilih Item</option>
                     @foreach($items as $item)
                         <option value="{{ $item->id }}">{{ $item->code }} - {{ $item->name_item }}</option>
@@ -30,6 +30,7 @@
             <div class="flex mb-4 gap-5">
                 <label for="price" class="block text-gray-700 font-bold mb-2">Harga:</label>
                 <p id="price" name="price" required></p>
+                <input type="hidden" id="hidden_price" name="price" value="">
             </div>
             <div class="mb-4">
                 <label for="qty" class="block text-gray-700 font-bold mb-2">Quantity:</label>
@@ -42,8 +43,8 @@
             <div class="mb-4">
                 <label for="pay" class="block text-gray-700 font-bold mb-2">Bayar:</label>
                     <div class="flex gap-1">
-                        <input type="checkbox" id="bayar" name="bayar" value="Lunas"> Lunas
-                        <input type="checkbox" id="bayar" name="bayar" value="Cicil"> Cicil
+                        <input type="checkbox" id="pay" name="pay" value="1"> Lunas
+                        <input type="checkbox" id="pay" name="pay" value="0"> Cicil
                     </div>
             </div>
             <button type="submit" name="submit" class="px-4 py-2 rounded-lg text-white bg-blue-500 hover:bg-blue-600 focus:outline-none">
@@ -78,10 +79,11 @@
         
 
         idItem.addEventListener('change', function() {
-        const selectedPrice = itemPrices[this.value];
-        idPrice.textContent = selectedPrice;
-        price = selectedPrice;
-        idTotal.textContent = selectedPrice * qty;
+            const selectedPrice = itemPrices[this.value];
+            idPrice.textContent = selectedPrice;
+            document.getElementById('hidden_price').value = selectedPrice; 
+            price = selectedPrice;
+            idTotal.textContent = selectedPrice * qty;
         });
 
         idquantity.addEventListener('change', function() {
