@@ -29,7 +29,6 @@ class KoperasiController extends Controller
     }
     function edit($id){
         $transaction = Koperasi::with('karyawan', 'item')->find($id);
-        // @dd($transaction->toJson());
         return view('transaction.edit', [
             'items'=> Item::all(), 
             'koperasis' => $transaction
