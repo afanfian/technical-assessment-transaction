@@ -23,12 +23,23 @@ class KoperasiController extends Controller
              'koperasis' => Koperasi::all()
         ]);
     }
-
     function store(Request $request){
         Koperasi::create($request->except('_token', 'submit'));
         return redirect('/transaction');
     }
-
+    function edit($id){
+        $transaction = Koperasi::find($id);
+        return view('transaction.edit', [
+            'karyawans' => Karyawan::all(),
+            'items' => Item::all(),
+            'koperasis' => Koperasi::all()
+        ], compact('transaction'));
+    }
+    
+    function update(Request $request, $id){
+        Koperasi::find($id)->update($request->except('_token', 'submit', '_method'));
+        return redirect('/transaction',);
+    }
     function destroy($id){
         Koperasi::destroy($id);
         return redirect('/transaction');

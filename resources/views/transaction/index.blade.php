@@ -92,7 +92,7 @@
                                 <td class="p-4 border">{{$item->item ? $item->item->name_item : '-'}}</td>
                                 <td class="p-4 border">{{$item->qty}}</td>
                                 <td class="p-4 border text-end">{{$item->price}}</td>
-                                <td class="p-4 border">{{$item->item ? $item->item->name_item : '-'}}</td>
+                                <td class="p-4 border text-end">{{ $item->qty * $item->price }}</td>
                                 <td class="p-4 border">
                                     @if ($item->pay === 1)
                                         Lunas
